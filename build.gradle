@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'jpa-basic'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // [inflearn] 자바 ORM 표준 JPA 프로그래밍 - 기본편
+
+    // 하이버네이트
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.4.10.Final'
+
+    // h2 데이터베이스
+    compile group: 'com.h2database', name: 'h2', version: '1.4.200'
+
+    /* Lombok */
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+}
