@@ -18,11 +18,10 @@ public class JpaMain {
 
         try {
 
-            Member member1 = new Member(150L, "A");
-            Member member2 = new Member(160L, "B");
+            Member member = em.find(Member.class, 150L);
+            member.setName("ZZZZZ");
 
-            em.persist(member1);
-            em.persist(member2);
+            // em.persist(member); // 컬렉션을 다루는 것 처럼 작업하게 되므로 반영하는 코드가 필요없다.
 
             System.out.println("======================");
 
