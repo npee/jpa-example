@@ -21,7 +21,9 @@ public class JpaMain {
             Member member = em.find(Member.class, 150L);
             member.setName("ZZZZZ");
 
-            // em.persist(member); // 컬렉션을 다루는 것 처럼 작업하게 되므로 반영하는 코드가 필요없다.
+            // em.persist(member); // 컬렉션을 다루는 것 처럼 작업하게 되므로 반영하는 코드가 필요없다.\
+            // 영속성 컨텍스트에서 빼내기
+            em.detach(member);
 
             System.out.println("======================");
 
