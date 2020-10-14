@@ -30,6 +30,10 @@ public class JpaMain {
             // 영속성 컨텍스트 초기화
             em.clear();
 
+            // 준영속 상태 만들기 3.
+            // 엔티티 매니저를 닫아버리는것도 방법이 될 수 있다.
+            em.close();
+
             System.out.println("======================");
 
             tx.commit();
