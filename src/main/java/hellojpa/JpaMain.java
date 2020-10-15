@@ -17,24 +17,7 @@ public class JpaMain {
 
         try {
 
-            Member member = em.find(Member.class, 150L);
-            member.setName("ZZZZZ");
 
-            // em.persist(member); // 컬렉션을 다루는 것 처럼 작업하게 되므로 반영하는 코드가 필요없다.\
-
-            // 준영속 상태 만들기 1.
-            // 영속성 컨텍스트에서 빼내기
-            em.detach(member);
-
-            // 준영속 상태 만들기 2.
-            // 영속성 컨텍스트 초기화
-            em.clear();
-
-            // 준영속 상태 만들기 3.
-            // 엔티티 매니저를 닫아버리는것도 방법이 될 수 있다.
-            em.close();
-
-            System.out.println("======================");
 
             tx.commit();
         } catch (Exception e) {
