@@ -33,5 +33,8 @@ public class Member {
 
     @Lob
     private String description;
+
+    @Transient
+    private int temp;
 }
 
