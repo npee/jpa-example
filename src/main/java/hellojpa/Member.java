@@ -11,10 +11,18 @@ import java.util.Date;
 @Entity
 @Getter
 @NoArgsConstructor // JPA는 기본적으로 내부적으로 리플렉션을 쓰기때문에 기본 생성자를 생성해줘야 한다.
+@SequenceGenerator(
+        name = "MEMBER_SEQ_GENERATOR",
+        sequenceName = "MEMBER_SEQ",
+        initialValue = 1, allocationSize = 1
+)
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "MEMBER_SEQ_GENERATOR"
+    )
     private Long id;
 
     @Column(name = "name")
