@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JpaMain {
 
@@ -16,16 +18,19 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
+            List<Member> members = new ArrayList<>();
 
-
-            member.setUsername("A");
-
+            for (int i = 0; i < 51; i++) {
+                members.add(new Member("SAME_NAME"));
+            }
+            for (Member member : members) {
+                em.persist(member);
+            }
             System.out.println("==========");
 
-            em.persist(member);
-            System.out.println("member.id = " + member.getId());
-
+            Member member52 = new Member("member52");
+            em.persist(member52);
+            System.out.println("member52.getId() = " + member52.getId());
             System.out.println("==========");
 
             tx.commit();
