@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+// @Entity
 @Getter
 @NoArgsConstructor // JPA는 기본적으로 내부적으로 리플렉션을 쓰기때문에 기본 생성자를 생성해줘야 한다.
 @SequenceGenerator(
