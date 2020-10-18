@@ -25,12 +25,14 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeamId(team.getId()); // 영속성 컨텍스트에 있는 TeamA의 id를 가져온다.
+            // member.setTeamId(team.getId());
+            member.setTeam(team); // team을 직접 저장..알아서 FK로 team_id 지정한다.
             em.persist(member);
 
             Member findMember = em.find(Member.class, member.getId());
-            Long findTeamId = findMember.getTeamId();
-            Team findTeam = em.find(Team.class, findTeamId);
+            // Long findTeamId = findMember.getTeamId();
+            // Team findTeam = em.find(Team.class, findTeamId);
+            Team findTeam = findMember.getTeam();
 
             System.out.println("===============");
             System.out.println("findTeam.getId() = " + findTeam.getId());
