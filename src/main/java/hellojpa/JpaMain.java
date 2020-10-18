@@ -23,26 +23,30 @@ public class JpaMain {
             team.setName("TeamA");
             em.persist(team); // TeamA의 pk가 지정되었음
 
-            Team team2 = new Team();
-            team2.setName("TeamB");
-            em.persist(team2);
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            member1.setTeam(team); // team을 직접 저장..알아서 FK로 team_id 지정한다.
+            em.persist(member1);
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setTeam(team); // team을 직접 저장..알아서 FK로 team_id 지정한다.
-            em.persist(member);
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setTeam(team);
+            em.persist(member2);
 
-            Member findMember = em.find(Member.class, member.getId());
-            Team findTeam = findMember.getTeam();
+            em.flush(); // DB에 미리 member들을 넣어둔다.
+            em.clear();
 
-            System.out.println("===============");
-            System.out.println("findTeam.getName() = " + findTeam.getName());
+            Member findMember = em.find(Member.class, member1.getId());
+            System.out.println(findMember.getTeam().getMembers());
+            // member1이 속한 팀의 멤버 리스트를 구하려면?
+            List<Member> members = findMember.getTeam().getMembers();
 
-            // 소속 팀 바꾸기
-            findMember.setTeam(team2);
-            System.out.println("TeamB로 교체");
-            findTeam = findMember.getTeam();
-            System.out.println("findTeam.getName() = " + findTeam.getName());
+            if (members.isEmpty())
+                System.out.println("리스트가 비어있습니다.");
+
+            for (Member m : members) {
+                System.out.println("m = " + m.getUsername());
+            }
 
             tx.commit();
         } catch (Exception e) {
