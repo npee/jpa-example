@@ -23,19 +23,26 @@ public class JpaMain {
             team.setName("TeamA");
             em.persist(team); // TeamA의 pk가 지정되었음
 
+            Team team2 = new Team();
+            team2.setName("TeamB");
+            em.persist(team2);
+
             Member member = new Member();
             member.setUsername("member1");
-            // member.setTeamId(team.getId());
             member.setTeam(team); // team을 직접 저장..알아서 FK로 team_id 지정한다.
             em.persist(member);
 
             Member findMember = em.find(Member.class, member.getId());
-            // Long findTeamId = findMember.getTeamId();
-            // Team findTeam = em.find(Team.class, findTeamId);
             Team findTeam = findMember.getTeam();
 
             System.out.println("===============");
-            System.out.println("findTeam.getId() = " + findTeam.getId());
+            System.out.println("findTeam.getName() = " + findTeam.getName());
+
+            // 소속 팀 바꾸기
+            findMember.setTeam(team2);
+            System.out.println("TeamB로 교체");
+            findTeam = findMember.getTeam();
+            System.out.println("findTeam.getName() = " + findTeam.getName());
 
             tx.commit();
         } catch (Exception e) {
