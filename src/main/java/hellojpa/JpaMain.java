@@ -18,20 +18,22 @@ public class JpaMain {
         tx.begin();
 
         try {
-            List<Member> members = new ArrayList<>();
 
-            for (int i = 0; i < 51; i++) {
-                members.add(new Member("SAME_NAME"));
-            }
-            for (Member member : members) {
-                em.persist(member);
-            }
-            System.out.println("==========");
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team); // TeamA의 pk가 지정되었음
 
-            Member member52 = new Member("member52");
-            em.persist(member52);
-            System.out.println("member52.getId() = " + member52.getId());
-            System.out.println("==========");
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeamId(team.getId()); // 영속성 컨텍스트에 있는 TeamA의 id를 가져온다.
+            em.persist(member);
+
+            Member findMember = em.find(Member.class, member.getId());
+            Long findTeamId = findMember.getTeamId();
+            Team findTeam = em.find(Team.class, findTeamId);
+
+            System.out.println("===============");
+            System.out.println("findTeam.getId() = " + findTeam.getId());
 
             tx.commit();
         } catch (Exception e) {
