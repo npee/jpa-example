@@ -18,35 +18,21 @@ public class JpaMain {
         tx.begin();
 
         try {
-
+            // 양방향 매핑 시 많이 하는 실수
             Team team = new Team();
             team.setName("TeamA");
-            em.persist(team); // TeamA의 pk가 지정되었음
+            // team.getMembers().add(member1); // 여기서 해봤자 반영되지 않는다.
+            em.persist(team);
 
             Member member1 = new Member();
+            member1.setTeam(team); // 연관관계의 주인에서 수정이 일어난다.
             member1.setUsername("member1");
-            member1.setTeam(team); // team을 직접 저장..알아서 FK로 team_id 지정한다.
             em.persist(member1);
 
-            Member member2 = new Member();
-            member2.setUsername("member2");
-            member2.setTeam(team);
-            em.persist(member2);
+            // team.getMembers().add(member1); // 여기서 해도 문제는 없는데 hibernate에서 반영하지 않는다.
 
             em.flush(); // DB에 미리 member들을 넣어둔다.
             em.clear();
-
-            Member findMember = em.find(Member.class, member1.getId());
-            System.out.println(findMember.getTeam().getMembers());
-            // member1이 속한 팀의 멤버 리스트를 구하려면?
-            List<Member> members = findMember.getTeam().getMembers();
-
-            if (members.isEmpty())
-                System.out.println("리스트가 비어있습니다.");
-
-            for (Member m : members) {
-                System.out.println("m = " + m.getUsername());
-            }
 
             tx.commit();
         } catch (Exception e) {
