@@ -25,9 +25,11 @@ public class JpaMain {
             em.persist(team);
 
             Member member1 = new Member();
-            member1.setTeam(team); // 연관관계의 주인에서 수정이 일어난다.
+            // member1.setTeam(team); // 연관관계의 주인에서 수정이 일어난다.
             member1.setUsername("member1");
             em.persist(member1);
+
+            team.setMember(member1); // 연관관계의 주인이 아닌 곳이지만 어떤 메서드로 값을 매핑할지는 알아서 선택한다.
 
             // team.getMembers().add(member1); // 객체지향스럽다. flush, clear 없이도 값을 조회한다.
 

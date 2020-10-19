@@ -29,7 +29,6 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
-        team.getMembers().add(this); // 연관관계용 편의 메서드 - 여기서 넣으면 같은 효과
     }
 }
 
