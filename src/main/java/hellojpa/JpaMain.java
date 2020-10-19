@@ -29,10 +29,17 @@ public class JpaMain {
             member1.setUsername("member1");
             em.persist(member1);
 
-            // team.getMembers().add(member1); // 여기서 해도 문제는 없는데 hibernate에서 반영하지 않는다.
+            team.getMembers().add(member1); // 객체지향스럽다. flush, clear 없이도 값을 조회한다.
 
-            em.flush(); // DB에 미리 member들을 넣어둔다.
-            em.clear();
+            // em.flush(); // DB에 미리 member들을 넣어둔다.
+            // em.clear();
+
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
+
+            for (Member member : members) {
+                System.out.println("member.getUsername() = " + member.getUsername());
+            }
 
             tx.commit();
         } catch (Exception e) {
