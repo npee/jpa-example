@@ -29,7 +29,7 @@ public class JpaMain {
             member1.setUsername("member1");
             em.persist(member1);
 
-            team.getMembers().add(member1); // 객체지향스럽다. flush, clear 없이도 값을 조회한다.
+            // team.getMembers().add(member1); // 객체지향스럽다. flush, clear 없이도 값을 조회한다.
 
             // em.flush(); // DB에 미리 member들을 넣어둔다.
             // em.clear();

@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
 public class Member {
 
     @Id @GeneratedValue
@@ -23,5 +22,14 @@ public class Member {
     @ManyToOne // Member - Team 관계는 N:1 관계이며, Member가 N이다.
     @JoinColumn(name = "TEAM_ID") // 어떤 컬럼이랑 조인해야되는가?
     private Team team;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this); // 연관관계용 편의 메서드 - 여기서 넣으면 같은 효과
+    }
 }
 
