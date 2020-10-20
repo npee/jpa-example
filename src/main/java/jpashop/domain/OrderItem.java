@@ -15,8 +15,12 @@ public class OrderItem {
     @Column(name = "order_id")
     private Long orderId;
 
-    @Column(name = "item_id")
-    private Long itemId;
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID") // Order와의 관계에서 OrderItem이 N이며 연관관계의 주인으로 FK를 관리하면 된다.
+    private Order order;
+
+//    @Column(name = "item_id")
+//    private Long itemId;
 
     @Column(name = "order_price")
     private int orderPrice;
