@@ -27,4 +27,9 @@ public class OrderItem {
 
     @Column(name = "count")
     private int count;
+
+    // 양방향 연관관계를 위한 setter
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }
