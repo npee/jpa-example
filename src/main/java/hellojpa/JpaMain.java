@@ -18,30 +18,17 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // 양방향 매핑 시 많이 하는 실수
+            Member member = new Member();
+            member.setUsername("member1");
+
+            em.persist(member);
+
             Team team = new Team();
-            team.setName("TeamA");
-            // team.getMembers().add(member1); // 여기서 해봤자 반영되지 않는다.
+            team.setName("teamA");
+
+            team.getMembers().add(member);
+
             em.persist(team);
-
-            Member member1 = new Member();
-            // member1.setTeam(team); // 연관관계의 주인에서 수정이 일어난다.
-            member1.setUsername("member1");
-            em.persist(member1);
-
-            team.setMember(member1); // 연관관계의 주인이 아닌 곳이지만 어떤 메서드로 값을 매핑할지는 알아서 선택한다.
-
-            // team.getMembers().add(member1); // 객체지향스럽다. flush, clear 없이도 값을 조회한다.
-
-            // em.flush(); // DB에 미리 member들을 넣어둔다.
-            // em.clear();
-
-            Team findTeam = em.find(Team.class, team.getId());
-            List<Member> members = findTeam.getMembers();
-
-            for (Member member : members) {
-                System.out.println("member.getUsername() = " + member.getUsername());
-            }
 
             tx.commit();
         } catch (Exception e) {
