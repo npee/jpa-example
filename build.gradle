@@ -20,7 +20,7 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.4.10.Final'
 
     // h2 데이터베이스
-    compile group: 'com.h2database', name: 'h2', version: '1.4.200'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.199'
 
     /* Lombok */
     compileOnly 'org.projectlombok:lombok:1.18.12'
