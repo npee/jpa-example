@@ -5,16 +5,21 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="hello">
-        <class>jpashop.domain.Member</class>
-        <class>jpashop.domain.Order</class>
-        <class>jpashop.domain.Item</class>
-        <class>jpashop.domain.OrderItem</class>
-        <class>jpashop.domain.Category</class>
-        <class>jpashop.domain.Delivery</class>
-<!--        <class>hellojpa.Member</class>-->
-<!--        <class>hellojpa.Team</class>-->
-<!--        <class>hellojpa.Locker</class>-->
-<!--        <class>hellojpa.Product</class>-->
+<!--        <class>jpashop.domain.Member</class>-->
+<!--        <class>jpashop.domain.Order</class>-->
+<!--        <class>jpashop.domain.Item</class>-->
+<!--        <class>jpashop.domain.OrderItem</class>-->
+<!--        <class>jpashop.domain.Category</class>-->
+<!--        <class>jpashop.domain.Delivery</class>-->
+        <class>hellojpa.Member</class>
+        <class>hellojpa.Team</class>
+        <class>hellojpa.Locker</class>
+        <class>hellojpa.Product</class>
+        <class>hellojpa.MemberProduct</class>
+        <class>hellojpa.Item</class>
+        <class>hellojpa.Album</class>
+        <class>hellojpa.Book</class>
+        <class>hellojpa.Movie</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
