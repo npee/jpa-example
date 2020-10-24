@@ -33,6 +33,13 @@ public class JpaMain {
             em.persist(movie);
             em.persist(album);
 
+            em.flush();
+            em.clear();
+
+            Movie findMovie = em.find(Movie.class, 1L);
+            System.out.println("findMovie.getName() = " + findMovie.getName());
+            System.out.println("findMovie.getDirector() = " + findMovie.getDirector());
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
