@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "ITEM_TYPE")
 public class Item {
 
     @Id @GeneratedValue
