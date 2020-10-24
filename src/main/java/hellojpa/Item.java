@@ -1,8 +1,14 @@
 package hellojpa;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Item {
 
     @Id @GeneratedValue
@@ -10,5 +16,5 @@ public class Item {
     private Long id;
 
     private String name;
-    private String price;
+    private int price;
 }

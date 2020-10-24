@@ -18,17 +18,20 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("member1");
 
-            em.persist(member);
+            Movie movie = new Movie();
+            movie.setDirector("감독");
+            movie.setActor("배우");
+            movie.setName("영화 제목");
+            movie.setPrice(10000);
 
-            Team team = new Team();
-            team.setName("teamA");
+            Album album = new Album();
+            album.setArtist("아티스트");
+            album.setName("앨범 제목");
+            album.setPrice(15000);
 
-            team.getMembers().add(member);
-
-            em.persist(team);
+            em.persist(movie);
+            em.persist(album);
 
             tx.commit();
         } catch (Exception e) {
