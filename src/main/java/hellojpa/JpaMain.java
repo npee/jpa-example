@@ -41,7 +41,9 @@ public class JpaMain {
             System.out.println("findMovie.getDirector() = " + findMovie.getDirector());
 
             Item item = em.find(Item.class, album.getId());
-            System.out.println("item.getName() = " + item.getName());
+            Album findAlbum = (Album) item;
+            System.out.println("item.getName() = " + findAlbum.getName());
+            System.out.println("findAlbum.getArtist() = " + findAlbum.getArtist());
 
             tx.commit();
         } catch (Exception e) {
