@@ -8,8 +8,8 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-// @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "ITEM_TYPE")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+// @DiscriminatorColumn(name = "ITEM_TYPE")
 public abstract class Item {
 
     @Id @GeneratedValue

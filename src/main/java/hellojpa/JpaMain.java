@@ -40,6 +40,9 @@ public class JpaMain {
             System.out.println("findMovie.getName() = " + findMovie.getName());
             System.out.println("findMovie.getDirector() = " + findMovie.getDirector());
 
+            Item item = em.find(Item.class, album.getId());
+            System.out.println("item.getName() = " + item.getName());
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
