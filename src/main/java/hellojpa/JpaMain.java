@@ -19,31 +19,21 @@ public class JpaMain {
 
         try {
 
-            Movie movie = new Movie();
-            movie.setDirector("감독");
-            movie.setActor("배우");
-            movie.setName("영화 제목");
-            movie.setPrice(10000);
+            Member member = new Member();
+            member.setUsername("A");
 
-            Album album = new Album();
-            album.setArtist("아티스트");
-            album.setName("앨범 제목");
-            album.setPrice(15000);
-
-            em.persist(movie);
-            em.persist(album);
+            em.persist(member);
 
             em.flush();
             em.clear();
 
-            Movie findMovie = em.find(Movie.class, 1L);
-            System.out.println("findMovie.getName() = " + findMovie.getName());
-            System.out.println("findMovie.getDirector() = " + findMovie.getDirector());
+            Member getMemberReference = em.getReference(Member.class, member.getId());
+            System.out.println("getMemberReference.getClass() = " + getMemberReference.getClass());
 
-            Item item = em.find(Item.class, album.getId());
-            Album findAlbum = (Album) item;
-            System.out.println("item.getName() = " + findAlbum.getName());
-            System.out.println("findAlbum.getArtist() = " + findAlbum.getArtist());
+            System.out.println("========================================================");
+
+            Member findMember = em.find(Member.class, member.getId());
+            System.out.println("findMember.getClass() = " + findMember.getClass());
 
             tx.commit();
         } catch (Exception e) {

@@ -17,7 +17,7 @@ public class Locker {
     private Long id;
     private String name;
 
-    @OneToOne(mappedBy = "locker") // 다대일과 같은 원리
-    private Member member;
+    // @OneToOne(mappedBy = "locker") // 다대일과 같은 원리
+    // private Member member;
 
 }
