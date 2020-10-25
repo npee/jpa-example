@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)
+// @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "ITEM_TYPE")
 public class Item {
 
