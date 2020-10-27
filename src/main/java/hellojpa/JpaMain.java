@@ -19,21 +19,27 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setUsername("A");
+            Member member1 = new Member();
+            member1.setUsername("A");
 
-            em.persist(member);
+            Member member2 = new Member();
+            member2.setUsername("B");
+
+            em.persist(member1);
+            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            Member getMemberReference = em.getReference(Member.class, member.getId());
-            System.out.println("getMemberReference.getClass() = " + getMemberReference.getClass());
+            Member findMember2 = em.getReference(Member.class, member2.getId());
+            System.out.println("member2.getClass() = " + findMember2.getClass());
+            System.out.println("member2 is equal to findMember(Proxy)? " + member2.equals(findMember2));
+            System.out.println("findMember(Proxy) is instance of Member? " + (findMember2 instanceof Member));
 
-            System.out.println("========================================================");
-
-            Member findMember = em.find(Member.class, member.getId());
-            System.out.println("findMember.getClass() = " + findMember.getClass());
+            Member findMember1 = em.find(Member.class, member1.getId());
+            System.out.println("member1.getClass() = " + findMember1.getClass());
+            System.out.println("member1 is equal to findMember? " + member1.equals(findMember1));
+            System.out.println("findMember is instance of Member? " + (findMember1 instanceof Member));
 
             tx.commit();
         } catch (Exception e) {
