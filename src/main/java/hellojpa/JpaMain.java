@@ -27,7 +27,7 @@ public class JpaMain {
 
             Member reference = em.getReference(Member.class, member1.getId());
             System.out.println("reference.getClass() = " + reference.getClass());
-            System.out.println("reference.getEmail() = " + reference.getEmail());
+            // System.out.println("reference.getEmail() = " + reference.getEmail());
             
             em.detach(reference);
 
