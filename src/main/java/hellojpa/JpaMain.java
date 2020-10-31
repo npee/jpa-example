@@ -1,5 +1,7 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -27,9 +29,14 @@ public class JpaMain {
 
             Member reference = em.getReference(Member.class, member1.getId());
             System.out.println("reference.getClass() = " + reference.getClass());
-            String username = reference.getUsername();
 
+            Hibernate.initialize(reference);
             System.out.println("reference is loaded? : " + emf.getPersistenceUnitUtil().isLoaded(reference));
+
+            em.detach(reference);
+
+            String username = reference.getUsername();
+            System.out.println("username = " + username);
 
             tx.commit();
         } catch (Exception e) {
