@@ -27,11 +27,8 @@ public class JpaMain {
 
             Member reference = em.getReference(Member.class, member1.getId());
             System.out.println("reference.getClass() = " + reference.getClass());
-            // System.out.println("reference.getEmail() = " + reference.getEmail());
-            
-            em.detach(reference);
 
-            System.out.println("reference.getUsername() = " + reference.getUsername());
+            System.out.println("reference is loaded? : " + emf.getPersistenceUnitUtil().isLoaded(reference));
 
             tx.commit();
         } catch (Exception e) {
