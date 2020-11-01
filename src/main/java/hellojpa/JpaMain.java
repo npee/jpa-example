@@ -34,6 +34,8 @@ public class JpaMain {
             Member m = em.find(Member.class, member1.getId());
             System.out.println("m.getTeam().getClass() = " + m.getTeam().getClass());
 
+            System.out.println("team name = " + m.getTeam().getName());
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
