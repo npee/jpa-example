@@ -21,20 +21,12 @@ public class Member extends BaseEntity {
     @Column(name = "EMAIL")
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private Team team;
 
-//    @OneToOne
-//    @JoinColumn(name = "LOCKER_ID")
-//    private Locker locker;
-
-//    @ManyToMany
-//    @JoinTable(name = "MEMBER_PRODUCT")
-//    private List<Product> products = new ArrayList<>();
     @OneToMany(mappedBy = "member")
     private List<MemberProduct> memberProducts = new ArrayList<>();
-
 
     public void setUsername(String username) {
         this.username = username;
@@ -42,6 +34,10 @@ public class Member extends BaseEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
 
