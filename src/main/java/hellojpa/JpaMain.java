@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
 
@@ -31,11 +32,12 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member m = em.find(Member.class, member1.getId());
-            System.out.println("m.getTeam().getClass() = " + m.getTeam().getClass());
-            System.out.println("====================");
-            m.getTeam().getName();
-            System.out.println("====================");
+            // Member m = em.find(Member.class, member1.getId());
+
+            List<Member> members = em.createQuery("select m from Member m", Member.class)
+                    .getResultList();
+
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
