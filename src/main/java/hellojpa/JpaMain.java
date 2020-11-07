@@ -22,13 +22,20 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setUsername("hello");
-            member.setHomeAddress(new Address("city", "street", "zipcode"));
-            member.setWorkAddress(new Address("w_city", "w_street", "w_zipcode"));
-            member.setPeriod(new Period());
+            Member member1 = new Member();
+            member1.setUsername("hello");
+            Address address = new Address("city", "street", "zipcode");
+            member1.setHomeAddress(address);
+            member1.setPeriod(new Period());
 
-            em.persist(member);
+            Member member2 = new Member();
+            member2.setUsername("hello2");
+            member2.setHomeAddress(address); // member1에서 사용했던 주소
+            member2.getHomeAddress().setCity("newCity"); // 도시명만 바꿔서 member2에 쓰자
+            member2.setPeriod(new Period());
+
+            em.persist(member1);
+            em.persist(member2);
 
             tx.commit();
         } catch (Exception e) {
