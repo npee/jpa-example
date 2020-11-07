@@ -1,5 +1,7 @@
 package hellojpa;
 
+import hellojpa.embedded.Address;
+import hellojpa.embedded.Period;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,13 +22,12 @@ public class Member {
     private String username;
 
     // Period
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    @Embedded
+    private Period period;
 
     // Address
-    private String city;
-    private String street;
-    private String zipcode;
+    @Embedded
+    private Address address;
 
 }
 
