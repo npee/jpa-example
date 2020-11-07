@@ -16,7 +16,7 @@ public class Parent {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST,
             orphanRemoval = true)
     private List<Child> childList = new ArrayList<>();
 
