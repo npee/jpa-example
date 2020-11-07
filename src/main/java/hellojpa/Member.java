@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
-public class Member extends BaseEntity {
+public class Member {
 
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -18,26 +19,14 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-    @Column(name = "EMAIL")
-    private String email;
+    // Period
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private Team team;
+    // Address
+    private String city;
+    private String street;
+    private String zipcode;
 
-    @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<>();
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 }
 
