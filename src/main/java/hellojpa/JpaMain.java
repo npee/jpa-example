@@ -24,15 +24,18 @@ public class JpaMain {
 
             Member member1 = new Member();
             member1.setUsername("hello");
-            Address address = new Address("city", "street", "zipcode");
-            member1.setHomeAddress(address);
+            Address address1 = new Address("city", "street", "zipcode");
+            member1.setHomeAddress(address1);
             member1.setPeriod(new Period());
 
             Member member2 = new Member();
             member2.setUsername("hello2");
-            member2.setHomeAddress(new Address("newCity", address.getStreet(), address.getZipcode()));
-            // member2.getHomeAddress().setCity("newCity"); // Compile Error
+            Address address2 = new Address("city", "street", "zipcode");
+            member2.setHomeAddress(address2);
             member2.setPeriod(new Period());
+
+            System.out.println("address1 == address2?: " + (address1 == address2));
+            System.out.println("address1 equals address2?: " + (address1.equals(address2)));
 
             em.persist(member1);
             em.persist(member2);
