@@ -1,5 +1,7 @@
 package hellojpa;
 
+import hellojpa.embedded.Address;
+import hellojpa.embedded.Period;
 import org.hibernate.Hibernate;
 
 import javax.persistence.EntityManager;
@@ -19,6 +21,13 @@ public class JpaMain {
         tx.begin();
 
         try {
+
+            Member member = new Member();
+            member.setUsername("hello");
+            member.setAddress(new Address("city", "street", "zipcode"));
+            member.setPeriod(new Period());
+
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
