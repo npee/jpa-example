@@ -19,11 +19,11 @@ public class Order extends BaseEntity {
 //    @Column(name = "MEMBER_ID")
 //    private Long memberId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member; // 회원의 입장에서는 주문을 여러개 할 수 있으므로 주문쪽이 N이다.
 
-    @OneToMany(mappedBy = "order") // order에 의해 관리된다.
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // order에 의해 관리된다.
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;
@@ -31,7 +31,7 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "DELIVERY_ID") // 일대일
     private Delivery delivery;
 
