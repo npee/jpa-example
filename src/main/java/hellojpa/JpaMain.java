@@ -25,24 +25,12 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setHomeAddress(new Address("homecity1", "street", "10000"));
-            member.getFavoriteFoods().add("치킨");
-            member.getFavoriteFoods().add("족발");
-            member.getFavoriteFoods().add("피자");
+            List<Member> list = em.createQuery("select m from MEMBER m where m.username like '%kim%'", Member.class)
+                    .getResultList();
 
-            member.getAddressHistory().add(new AddressEntity("old1", "street", "10000"));
-            member.getAddressHistory().add(new AddressEntity("old2", "street", "10000"));
-
-            em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            System.out.println("+++++++++++++ START ++++++++++++++");
-            AddressEntity findAddressHistory = em.find(AddressEntity.class, 3L);
-            findAddressHistory.setAddress(new Address("newCity", "street", "10000"));
+            for (Member member : list) {
+                System.out.println("member.getUsername() = " + member.getUsername());
+            }
 
             tx.commit();
         } catch (Exception e) {
