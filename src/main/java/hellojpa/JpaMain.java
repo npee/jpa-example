@@ -1,6 +1,7 @@
 package hellojpa;
 
 import hellojpa.embedded.Address;
+import hellojpa.embedded.AddressEntity;
 import hellojpa.embedded.Period;
 import org.hibernate.Hibernate;
 
@@ -30,8 +31,8 @@ public class JpaMain {
             member.getFavoriteFoods().add("족발");
             member.getFavoriteFoods().add("피자");
 
-            member.getAddressHistory().add(new Address("old1", "street", "10000"));
-            member.getAddressHistory().add(new Address("old2", "street", "10000"));
+            member.getAddressHistory().add(new AddressEntity("old1", "street", "10000"));
+            member.getAddressHistory().add(new AddressEntity("old2", "street", "10000"));
 
             em.persist(member);
 
@@ -40,9 +41,6 @@ public class JpaMain {
 
             System.out.println("+++++++++++++ START ++++++++++++++");
             Member findMember = em.find(Member.class, member.getId());
-
-            findMember.getAddressHistory().remove(new Address("old1", "street", "10000"));
-            findMember.getAddressHistory().add(new Address("newCity1", "street", "10000"));
 
             tx.commit();
         } catch (Exception e) {

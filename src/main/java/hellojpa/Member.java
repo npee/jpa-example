@@ -1,6 +1,7 @@
 package hellojpa;
 
 import hellojpa.embedded.Address;
+import hellojpa.embedded.AddressEntity;
 import hellojpa.embedded.Period;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,10 +38,14 @@ public class Member {
     @Column(name = "FOOD_NAME")
     private Set<String> favoriteFoods = new HashSet<>();
 
-    @ElementCollection
-    @CollectionTable(name = "ADDRESS_HISTORY", joinColumns =
-        @JoinColumn(name = "MEMBER_ID"))
-    private List<Address> addressHistory = new ArrayList<>();
+//    @ElementCollection
+//    @CollectionTable(name = "ADDRESS_HISTORY", joinColumns =
+//        @JoinColumn(name = "MEMBER_ID"))
+//    private List<Address> addressHistory = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
 
 }
 
