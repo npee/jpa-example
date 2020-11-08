@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
 
@@ -22,23 +21,17 @@ public class JpaMain {
 
         try {
 
-            Member member1 = new Member();
-            member1.setUsername("hello");
-            Address address1 = new Address("city", "street", "zipcode");
-            member1.setHomeAddress(address1);
-            member1.setPeriod(new Period());
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setHomeAddress(new Address("homecity1", "street", "10000"));
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("족발");
+            member.getFavoriteFoods().add("피자");
 
-            Member member2 = new Member();
-            member2.setUsername("hello2");
-            Address address2 = new Address("city", "street", "zipcode");
-            member2.setHomeAddress(address2);
-            member2.setPeriod(new Period());
+            member.getAddressHistory().add(new Address("old1", "street", "10000"));
+            member.getAddressHistory().add(new Address("old2", "street", "10000"));
 
-            System.out.println("address1 == address2?: " + (address1 == address2));
-            System.out.println("address1 equals address2?: " + (address1.equals(address2)));
-
-            em.persist(member1);
-            em.persist(member2);
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
