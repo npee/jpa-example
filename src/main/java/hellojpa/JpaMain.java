@@ -4,6 +4,7 @@ import hellojpa.embedded.Address;
 import hellojpa.embedded.AddressEntity;
 import hellojpa.embedded.Period;
 import org.hibernate.Hibernate;
+import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -40,7 +41,8 @@ public class JpaMain {
             em.clear();
 
             System.out.println("+++++++++++++ START ++++++++++++++");
-            Member findMember = em.find(Member.class, member.getId());
+            AddressEntity findAddressHistory = em.find(AddressEntity.class, 3L);
+            findAddressHistory.setAddress(new Address("newCity", "street", "10000"));
 
             tx.commit();
         } catch (Exception e) {
