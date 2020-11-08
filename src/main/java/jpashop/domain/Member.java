@@ -18,9 +18,9 @@ public class Member extends BaseEntity {
     private List<Order> orders = new ArrayList<>();
 
     private String name;
-    private String city;
-    private String street;
-    private String zipcode;
+
+    @Embedded
+    private Address address;
 
     public void setName(String name) {
         this.name = name;
