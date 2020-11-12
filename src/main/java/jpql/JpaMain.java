@@ -20,8 +20,8 @@ public class JpaMain {
             em.persist(member);
 
             Member singleResult =
-                    em.createQuery("select m from Member as m where m.username = :username", Member.class)
-                            .setParameter("username" ,"member1")
+                    em.createQuery("select m from Member as m where m.username = ?1", Member.class)
+                            .setParameter(1 ,"member1")
                             .getSingleResult();
             System.out.println("singleResult = " + singleResult.getUsername());
 
