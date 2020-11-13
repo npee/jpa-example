@@ -22,7 +22,7 @@ public class JpaMain {
             Member singleResult =
                     em.createQuery("select m from Member as m where m.username = ?1", Member.class)
                             .setParameter(1 ,"member1")
-                            .getSingleResult();
+                            .getSingleResult(); 
             System.out.println("singleResult = " + singleResult.getUsername());
 
             em.flush();
