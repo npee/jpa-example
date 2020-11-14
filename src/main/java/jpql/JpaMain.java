@@ -26,6 +26,10 @@ public class JpaMain {
             List result = em.createQuery("select m.username, m.age from Member as m")
                     .getResultList();
 
+            Object[] res = (Object[]) result.get(0);
+            System.out.println("resultList.username = " + res[0]);
+            System.out.println("resultList.age = " + res[1]);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
