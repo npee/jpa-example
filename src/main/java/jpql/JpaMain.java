@@ -23,10 +23,8 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            List<Address> resultList =
-                    em.createQuery("select o.address from Order as o", Address.class)
+            List result = em.createQuery("select m.username, m.age from Member as m")
                     .getResultList();
-
 
             tx.commit();
         } catch (Exception e) {
