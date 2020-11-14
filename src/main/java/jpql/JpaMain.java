@@ -23,12 +23,11 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            List result = em.createQuery("select m.username, m.age from Member as m")
+            List<Object[]> result = em.createQuery("select m.username, m.age from Member as m")
                     .getResultList();
 
-            Object[] res = (Object[]) result.get(0);
-            System.out.println("resultList.username = " + res[0]);
-            System.out.println("resultList.age = " + res[1]);
+            System.out.println("resultList.username = " + result.get(0)[0]);
+            System.out.println("resultList.age = " + result.get(0)[1]);
 
             tx.commit();
         } catch (Exception e) {
