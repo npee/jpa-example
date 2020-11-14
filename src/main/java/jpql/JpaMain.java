@@ -14,24 +14,38 @@ public class JpaMain {
         tx.begin();
 
         try {
-            for (int i = 0; i < 100; i++) {
-                Member member = new Member();
-                member.setUsername("member" + i);
-                member.setAge(20);
-                em.persist(member);
-            }
+
+            Team team = new Team();
+            team.setName("team1");
+            em.persist(team);
+
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            member1.setAge(10);
+
+            member1.setTeam(team);
+
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setAge(20);
+
+            member2.setTeam(team);
+
+            em.persist(member2);
 
             em.flush();
             em.clear();
 
+            String query = "select m from Member as m inner join m.team where m.age = 20";
             List<Member> resultList =
-                    em.createQuery("select m from Member as m order by m.id", Member.class)
-                            .setFirstResult(0)
-                            .setMaxResults(10)
+                    em.createQuery(query, Member.class)
                             .getResultList();
 
-            for (Member member1 : resultList) {
-                System.out.println("member1 = " + member1);
+            for (Member member : resultList) {
+                System.out.println("member1 = " + member);
+                System.out.println("member1.getTeam().getName() = " + member.getTeam().getName());
             }
 
             tx.commit();
