@@ -14,9 +14,15 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
             Member member = new Member();
             member.setUsername("member1");
             member.setAge(10);
+            member.setTeam(team);
+
             em.persist(member);
 
             em.flush();
@@ -26,8 +32,14 @@ public class JpaMain {
                     em.createQuery("select m from Member as m", Member.class)
                             .getResultList();
 
+            Team team1 =
+                    em.createQuery("select m.team from Member as m", Team.class)
+                            .getSingleResult();
+
             Member findMember = result.get(0);
             findMember.setAge(20);
+
+            team1.setName("TeamAA");
 
             tx.commit();
         } catch (Exception e) {
