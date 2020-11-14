@@ -33,7 +33,7 @@ public class JpaMain {
                             .getResultList();
 
             Team team1 =
-                    em.createQuery("select m.team from Member as m", Team.class)
+                    em.createQuery("select t from Member as m join m.team t", Team.class)
                             .getSingleResult();
 
             Member findMember = result.get(0);
