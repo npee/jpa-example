@@ -18,4 +18,12 @@ public class Member {
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
+    @Override
+    public String toString() { // 순환참조 방지를 위해 team 제외
+        return "Member{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
