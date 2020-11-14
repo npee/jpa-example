@@ -19,13 +19,15 @@ public class JpaMain {
             member.setAge(10);
             em.persist(member);
 
-            Member singleResult =
-                    em.createQuery("select m from Member as m where m.username = ?1", Member.class)
-                            .setParameter(1 ,"member1")
-                            .getSingleResult(); 
-            System.out.println("singleResult = " + singleResult.getUsername());
-
             em.flush();
+            em.clear();
+
+            List<Member> result =
+                    em.createQuery("select m from Member as m", Member.class)
+                            .getResultList();
+
+            Member findMember = result.get(0);
+            findMember.setAge(20);
 
             tx.commit();
         } catch (Exception e) {
