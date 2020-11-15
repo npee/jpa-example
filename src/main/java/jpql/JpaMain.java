@@ -38,13 +38,13 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m from Member as m where m.age > (select avg(m2.age) from Member as m2)";
+            String query = "select m from Member m where m.team = ANY (select t from Team t)";
             List<Member> resultList =
                     em.createQuery(query, Member.class)
                             .getResultList();
 
             for (Member member : resultList) {
-                System.out.println("member1 = " + member);
+                System.out.println("member = " + member);
             }
 
             tx.commit();
