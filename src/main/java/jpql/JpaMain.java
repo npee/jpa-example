@@ -39,17 +39,12 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m.username, 'hello', true, 100L from Member as m " +
-                    "where m.memberType = :memberType";
-            List<Object[]> results = em.createQuery(query)
-                    .setParameter("memberType", MemberType.USER)
-                    .getResultList();
+            String query = "select m.username from Member as m " +
+                    "where m.username is not null";
+            List<String> results = em.createQuery(query).getResultList();
 
-            for (Object[] result : results) {
-                System.out.println("result[0] = " + result[0]);
-                System.out.println("result[1] = " + result[1]);
-                System.out.println("result[2] = " + result[2]);
-                System.out.println("result[3] = " + result[3]);
+            for (String result : results) {
+                System.out.println("result = " + result);
             }
 
             tx.commit();
