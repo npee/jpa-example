@@ -1,9 +1,6 @@
 package jpashop;
 
-import jpashop.domain.Book;
-import jpashop.domain.Member;
-import jpashop.domain.Order;
-import jpashop.domain.OrderItem;
+import jpashop.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,6 +24,10 @@ public class JpaMain {
             Book book = new Book();
             book.setName("JPA");
             book.setAuthor("김영한");
+
+            List<Item> items =
+                    em.createQuery("select i from Item i where type(i) = Book", Item.class)
+                            .getResultList();
 
             em.persist(book);
 
