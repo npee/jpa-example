@@ -40,7 +40,7 @@ public class JpaMain {
             em.clear();
 
             String query = "select m.username from Member as m " +
-                    "where m.username is not null";
+                    "where m.age between 16 and 22";
             List<String> results = em.createQuery(query).getResultList();
 
             for (String result : results) {
