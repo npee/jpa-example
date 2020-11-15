@@ -22,6 +22,7 @@ public class JpaMain {
             Member member1 = new Member();
             member1.setUsername("member1");
             member1.setAge(10);
+            member1.setMemberType(MemberType.USER);
 
             member1.setTeam(team);
 
@@ -38,7 +39,8 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m.username, 'hello', true, 100L from Member as m";
+            String query = "select m.username, 'hello', true, 100L from Member as m " +
+                    "where m.memberType = jpql.MemberType.USER";
             List<Object[]> results = em.createQuery(query).getResultList();
 
             for (Object[] result : results) {
