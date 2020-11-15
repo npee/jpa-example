@@ -38,7 +38,7 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m from Member m where m.team = ANY (select t from Team t)";
+            String query = "select m from Member m where exists (select t from m.team t where t.name = 'team1')";
             List<Member> resultList =
                     em.createQuery(query, Member.class)
                             .getResultList();
