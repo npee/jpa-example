@@ -39,12 +39,16 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m.username from Member as m " +
-                    "where m.age between 16 and 22";
-            List<String> results = em.createQuery(query).getResultList();
+            String query = "select case when m.age <= 15 then '학생요금' " +
+                    "when m.age >= 60 then '경로요금' " +
+                    "else '일반요금' end " +
+                    "from Member m";
 
-            for (String result : results) {
-                System.out.println("result = " + result);
+            List<String> resultList = em.createQuery(query, String.class)
+                    .getResultList();
+
+            for (String s : resultList) {
+                System.out.println("s = " + s);
             }
 
             tx.commit();
