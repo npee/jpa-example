@@ -1,6 +1,7 @@
 package jpql;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 public class JpaMain {
@@ -31,14 +32,12 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m.team.name from Member m";
+            String query = "select t.members.size from Team t";
 
-            List<String> resultList = em.createQuery(query, String.class)
+            List<Collection> resultList = em.createQuery(query, Collection.class)
                     .getResultList();
 
-            for (String s : resultList) {
-                System.out.println("s = " + s);
-            }
+            System.out.println("resultList = " + resultList);
 
             tx.commit();
         } catch (Exception e) {
