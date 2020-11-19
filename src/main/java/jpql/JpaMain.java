@@ -32,12 +32,13 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select t.members.size from Team t";
+            String query = "select m.username from Team t join t.members m";
 
-            Integer size = em.createQuery(query, Integer.class)
-                    .getSingleResult();
+            List<String> result = em.createQuery(query, String.class)
+                    .getResultList();
 
-            System.out.println("size = " + size);
+            System.out.println("result = " + result);
+
 
             tx.commit();
         } catch (Exception e) {
