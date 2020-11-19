@@ -19,16 +19,20 @@ public class JpaMain {
             member1.setUsername("member1");
             em.persist(member1);
 
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            em.persist(member2);
+
             em.flush();
             em.clear();
 
-            String query = "select index(t.members) from Team t";
+            String query = "select function('group_concat', m.username) from Member m";
 
-            List<Integer> resultList = em.createQuery(query, Integer.class)
+            List<String> resultList = em.createQuery(query, String.class)
                     .getResultList();
 
-            for (Integer i : resultList) {
-                System.out.println("i = " + i);
+            for (String s : resultList) {
+                System.out.println("s = " + s);
             }
 
             tx.commit();
