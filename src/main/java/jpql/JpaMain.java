@@ -31,12 +31,12 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m.team from Member m";
+            String query = "select m.team.name from Member m";
 
-            List<Team> resultList = em.createQuery(query, Team.class)
+            List<String> resultList = em.createQuery(query, String.class)
                     .getResultList();
 
-            for (Team s : resultList) {
+            for (String s : resultList) {
                 System.out.println("s = " + s);
             }
 
