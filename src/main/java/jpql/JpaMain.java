@@ -34,10 +34,10 @@ public class JpaMain {
 
             String query = "select t.members.size from Team t";
 
-            List<Collection> resultList = em.createQuery(query, Collection.class)
-                    .getResultList();
+            Integer size = em.createQuery(query, Integer.class)
+                    .getSingleResult();
 
-            System.out.println("resultList = " + resultList);
+            System.out.println("size = " + size);
 
             tx.commit();
         } catch (Exception e) {
