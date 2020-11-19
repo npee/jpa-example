@@ -14,24 +14,29 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Team team = new Team();
+            team.setName("team1");
+            em.persist(team);
 
             Member member1 = new Member();
             member1.setUsername("member1");
+            member1.setTeam(team);
             em.persist(member1);
 
             Member member2 = new Member();
             member2.setUsername("member2");
+            member2.setTeam(team);
             em.persist(member2);
 
             em.flush();
             em.clear();
 
-            String query = "select group_concat(m.username) from Member m";
+            String query = "select m.team from Member m";
 
-            List<String> resultList = em.createQuery(query, String.class)
+            List<Team> resultList = em.createQuery(query, Team.class)
                     .getResultList();
 
-            for (String s : resultList) {
+            for (Team s : resultList) {
                 System.out.println("s = " + s);
             }
 
