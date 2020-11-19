@@ -19,20 +19,16 @@ public class JpaMain {
             member1.setUsername("member1");
             em.persist(member1);
 
-            Member member2 = new Member();
-            member1.setUsername("member2");
-            em.persist(member2);
-
             em.flush();
             em.clear();
 
-            String query = "select substring(m.username, 1, 2) from Member m";
+            String query = "select locate('de','abcdefg') from Member m";
 
-            List<String> resultList = em.createQuery(query, String.class)
+            List<Integer> resultList = em.createQuery(query, Integer.class)
                     .getResultList();
 
-            for (String s : resultList) {
-                System.out.println("s = " + s);
+            for (Integer i : resultList) {
+                System.out.println("i = " + i);
             }
 
             tx.commit();
