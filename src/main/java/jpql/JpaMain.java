@@ -15,30 +15,44 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("team1");
-            em.persist(team);
+            Team team1 = new Team();
+            team1.setName("팀A");
+            em.persist(team1);
+
+            Team team2 = new Team();
+            team1.setName("팀B");
+            em.persist(team2);
 
             Member member1 = new Member();
-            member1.setUsername("member1");
-            member1.setTeam(team);
+            member1.setUsername("회원1");
+            member1.setTeam(team1);
             em.persist(member1);
 
             Member member2 = new Member();
-            member2.setUsername("member2");
-            member2.setTeam(team);
+            member2.setUsername("회원2");
+            member2.setTeam(team1);
             em.persist(member2);
+
+            Member member3 = new Member();
+            member3.setUsername("회원3");
+            member3.setTeam(team2);
+            em.persist(member3);
+
+            Member member4 = new Member();
+            member4.setUsername("회원4");
+            em.persist(member4);
 
             em.flush();
             em.clear();
 
-            String query = "select m.username from Team t join t.members m";
+            String query = "select m from Member m";
 
-            List<String> result = em.createQuery(query, String.class)
+            List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
 
-            System.out.println("result = " + result);
-
+            for (Member member : result) {
+                System.out.println("member = " + member);
+            }
 
             tx.commit();
         } catch (Exception e) {
