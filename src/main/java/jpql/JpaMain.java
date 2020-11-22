@@ -20,8 +20,12 @@ public class JpaMain {
             em.persist(team1);
 
             Team team2 = new Team();
-            team1.setName("팀B");
+            team2.setName("팀B");
             em.persist(team2);
+
+            Team team3 = new Team();
+            team3.setName("팀C");
+            em.persist(team3);
 
             Member member1 = new Member();
             member1.setUsername("회원1");
@@ -51,7 +55,8 @@ public class JpaMain {
                     .getResultList();
 
             for (Member member : result) {
-                System.out.println("member = " + member);
+                System.out.println("member = " + member.getUsername() +
+                        ", team = " + member.getTeam().getName());
             }
 
             tx.commit();
