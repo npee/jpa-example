@@ -48,6 +48,8 @@ public class JpaMain {
             String query = "select distinct t from Team t join fetch t.members";
 
             List<Team> result = em.createQuery(query, Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(1)
                     .getResultList();
 
             System.out.println("result.size() = " + result.size());
