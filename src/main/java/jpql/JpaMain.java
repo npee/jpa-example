@@ -45,12 +45,19 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select t from Team t";
+            String query = "select t from Team t join fetch t.members";
 
             List<Team> result = em.createQuery(query, Team.class)
                     .getResultList();
 
             System.out.println("result.size() = " + result.size());
+
+            for (Team team : result) {
+                System.out.println("team.getName() = " + team.getName());
+                for (Member member : team.getMembers()) {
+                    System.out.println(" -> member.getUsername() = " + member.getUsername());
+                }
+            }
 
 
             tx.commit();
