@@ -42,9 +42,6 @@ public class JpaMain {
             member4.setUsername("회원4");
             em.persist(member4);
 
-            em.flush();
-            em.clear();
-
             int resultCount = em.createQuery("update Member m set m.age = 20")
                     .executeUpdate();
 
